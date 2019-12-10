@@ -6,7 +6,7 @@ export interface GraphTopologyState {
 }
 
 export interface GraphTopologyActions {
-    addConnection?: AddConnectionAction;
+    addConnection: AddConnectionAction;
 }
 
 export const GraphTopologyStateContext = React.createContext<GraphTopologyState>({
@@ -14,6 +14,7 @@ export const GraphTopologyStateContext = React.createContext<GraphTopologyState>
 });
 
 export const GraphTopologyActionsContext = React.createContext<GraphTopologyActions>({
+    addConnection: (edgeId1: string, edgeId2: string) => {}
 });
 
 export function useGraphTopologyState(): GraphTopologyState {
