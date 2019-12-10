@@ -20,29 +20,31 @@ export  function parseConnectionsDataAction(dispatch: any) {
         const graph: Graph = {};
 
         connections.forEach((connection: string) => {
-            const splitted: string[] = connection.split(" calls ");
-            if (splitted.length === 2) {
-                console.log(splitted);
-                const edge1Id = splitted[0].trim();
-                const edge2Id = splitted[1].trim();
-                if (!graph[edge1Id]) {
-                    graph[edge1Id] = {
-                        edges: [edge2Id],
-                        in_degree: 0
+            if (connection.length !== 0) {
+                const splitted: string[] = connection.split(" calls ");
+                if (splitted.length === 2) {
+                    console.log(splitted);
+                    const edge1Id = splitted[0].trim();
+                    const edge2Id = splitted[1].trim();
+                    if (!graph[edge1Id]) {
+                        graph[edge1Id] = {
+                            edges: [edge2Id],
+                            in_degree: 0
+                        }
+                    } else {
+                        graph[edge1Id].edges.push(edge2Id);
+                    }
+                    if (!graph[edge2Id]) {
+                        graph[edge2Id] = {
+                            edges: [],
+                            in_degree: 1
+                        }
+                    } else {
+                        graph[edge2Id].in_degree += 1;
                     }
                 } else {
-                    graph[edge1Id].edges.push(edge2Id);
+                    console.warn("wrong data format: " + connection);
                 }
-                if (!graph[edge2Id]) {
-                    graph[edge2Id] = {
-                        edges: [],
-                        in_degree: 1
-                    }
-                } else {
-                    graph[edge1Id].in_degree += 1;
-                }
-            } else {
-                console.warn("wrong data format: " + connection);
             }
         });
         const V = Object.keys(graph);
