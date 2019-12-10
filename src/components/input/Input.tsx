@@ -5,7 +5,6 @@ import {useGraphTopologyActions} from "../../core/graphTopologyProvider/GraphTop
 export const Input: React.FC = () => {
     const { parseConnectionsData } = useGraphTopologyActions();
     const fromRef = React.useRef<any>(null);
-    const toRef = React.useRef<any>(null);
     return (
         <div className={styles.InputWrapper}>
             <textarea className={styles.textarea} rows={40} cols={40} ref={fromRef} placeholder="<caller> calls <callee>"/>

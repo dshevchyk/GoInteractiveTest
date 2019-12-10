@@ -8,7 +8,9 @@ export const Topology: React.FC = () => {
     const { topology } = useGraphTopologyState();
     return (
         <div className={styles.Topology}>
-            {topology.map((item: string) => item)}
+            {topology.map((item: string) => {
+                return <div className={styles.TopologyItem} key={item}>{item} </div>;
+            })}
         </div>
     );
 }

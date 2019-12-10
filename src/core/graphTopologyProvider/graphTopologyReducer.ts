@@ -1,4 +1,4 @@
-import {GraphTopologyActions, GraphTopologyState} from "./GraphTopologyContext";
+import {GraphTopologyState} from "./GraphTopologyContext";
 import {GraphTopologyActionTypes} from "./GraphTopologyActionTypes";
 
 export function graphTopologyReducer(state: GraphTopologyState, action: {type: string, payload: any}): GraphTopologyState {
