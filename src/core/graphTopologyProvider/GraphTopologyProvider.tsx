@@ -1,13 +1,13 @@
 import React from 'react';
 import {graphTopologyReducer} from "./graphTopologyReducer";
-import {addConnectionAction} from "./actions/addConnection";
+import {parseConnectionsDataAction} from "./actions/parseConnectionsDataAction";
 import {GraphTopologyActions, GraphTopologyActionsContext, GraphTopologyStateContext} from './GraphTopologyContext';
 
 export const GraphTopologyProvider: React.FC = ({children}) => {
     const [state, dispatch] = React.useReducer(graphTopologyReducer, { topology: [] })
 
     const actions: GraphTopologyActions = React.useMemo(() => ({
-        addConnection: addConnectionAction(dispatch),
+        parseConnectionsData: parseConnectionsDataAction(dispatch),
     }), []);
     return (
         <GraphTopologyStateContext.Provider value={state}>

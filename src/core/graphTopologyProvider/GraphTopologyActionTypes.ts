@@ -1,3 +1,3 @@
 export enum GraphTopologyActionTypes {
-    ADD_CONNECTION = "GraphTopologyActionTypes.ADD_CONNECTION",
+    PARSE_CONNECTIONS_DATA = "GraphTopologyActionTypes.PARSE_CONNECTIONS_DATA",
 }

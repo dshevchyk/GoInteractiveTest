@@ -1,12 +1,12 @@
 import React from 'react'
-import {AddConnectionAction} from "./actions/addConnection";
+import {ParseConnectionsDataAction} from "./actions/parseConnectionsDataAction";
 
 export interface GraphTopologyState {
     topology: Array<string>;
 }
 
 export interface GraphTopologyActions {
-    addConnection: AddConnectionAction;
+    parseConnectionsData: ParseConnectionsDataAction;
 }
 
 export const GraphTopologyStateContext = React.createContext<GraphTopologyState>({
@@ -14,7 +14,7 @@ export const GraphTopologyStateContext = React.createContext<GraphTopologyState>
 });
 
 export const GraphTopologyActionsContext = React.createContext<GraphTopologyActions>({
-    addConnection: (edgeId1: string, edgeId2: string) => {}
+    parseConnectionsData: (data: string) => {}
 });
 
 export function useGraphTopologyState(): GraphTopologyState {

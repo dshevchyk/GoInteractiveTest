@@ -1,8 +1,11 @@
 .InputWrapper {
-    width: 100px;
-    height: 100px;
-    background: red;
+    display: grid;
+    background: transparent;
 }
-.Input {
+.textarea {
 
+}
+
+.submitButton {
+    max-width: 200px
 }
