@@ -12,13 +12,19 @@ interface Graph {
     [key: string]: GraphDataItem;
 }
 
+
+interface VisitedData {
+    [key: string]: boolean;
+}
+
 export  function parseConnectionsDataAction(dispatch: any) {
     return async (data: string) => {
 
         const connections: string[] = data.split(/\r?\n/);
         let topology: string[] = [];
         const graph: Graph = {};
-
+        const secredHash = "%^&";
+        const visited: VisitedData = {}
         connections.forEach((connection: string) => {
             if (connection.length !== 0) {
                 const splitted: string[] = connection.split(" calls ");
@@ -26,21 +32,25 @@ export  function parseConnectionsDataAction(dispatch: any) {
                     console.log(splitted);
                     const edge1Id = splitted[0].trim();
                     const edge2Id = splitted[1].trim();
-                    if (!graph[edge1Id]) {
-                        graph[edge1Id] = {
-                            edges: [edge2Id],
-                            in_degree: 0
+                    const visitedKey = edge1Id + secredHash + edge2Id;
+                    if (!visited[visitedKey]) {
+                        if (!graph[edge1Id]) {
+                            graph[edge1Id] = {
+                                edges: [edge2Id],
+                                in_degree: 0
+                            }
+                        } else {
+                            graph[edge1Id].edges.push(edge2Id);
                         }
-                    } else {
-                        graph[edge1Id].edges.push(edge2Id);
-                    }
-                    if (!graph[edge2Id]) {
-                        graph[edge2Id] = {
-                            edges: [],
-                            in_degree: 1
+                        if (!graph[edge2Id]) {
+                            graph[edge2Id] = {
+                                edges: [],
+                                in_degree: 1
+                            }
+                        } else {
+                            graph[edge2Id].in_degree += 1;
                         }
-                    } else {
-                        graph[edge2Id].in_degree += 1;
+                        visited[visitedKey] = true;
                     }
                 } else {
                     console.warn("wrong data format: " + connection);
