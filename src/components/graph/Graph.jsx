@@ -20,6 +20,9 @@ const myConfig = {
     },
 };
 
+/**
+ * @return {null}
+ */
 export function GraphComponent(props) {
     // graph payload (with minimalist structure)
     const [data, setData] = useState([]);

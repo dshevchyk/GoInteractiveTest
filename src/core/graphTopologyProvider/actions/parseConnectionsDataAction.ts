@@ -31,7 +31,6 @@ export  function parseConnectionsDataAction(dispatch: any) {
             if (connection.length !== 0) {
                 const splitted: string[] = connection.split(" calls ");
                 if (splitted.length === 2) {
-                    console.log(splitted);
                     const edge1Id = splitted[0].trim();
                     const edge2Id = splitted[1].trim();
                     const visitedKey = edge1Id + secretHash + edge2Id;
