@@ -1,8 +1,14 @@
 import React from 'react'
 import {ParseConnectionsDataAction} from "./actions/parseConnectionsDataAction";
 
+export interface Link {
+    source: string;
+    target: string;
+}
+
 export interface GraphTopologyState {
     topology: Array<string>;
+    links: Array<Link>;
 }
 
 export interface GraphTopologyActions {
@@ -10,7 +16,8 @@ export interface GraphTopologyActions {
 }
 
 export const GraphTopologyStateContext = React.createContext<GraphTopologyState>({
-    topology: []
+    topology: [],
+    links: []
 });
 
 export const GraphTopologyActionsContext = React.createContext<GraphTopologyActions>({

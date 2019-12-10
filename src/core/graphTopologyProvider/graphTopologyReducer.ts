@@ -6,7 +6,8 @@ export function graphTopologyReducer(state: GraphTopologyState, action: {type: s
         case GraphTopologyActionTypes.PARSE_CONNECTIONS_DATA:
             return {
                 ...state,
-                topology: action.payload
+                topology: action.payload.topology,
+                links: action.payload.links
             };
         default: {
             return state;

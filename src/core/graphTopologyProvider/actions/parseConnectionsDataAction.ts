@@ -1,4 +1,5 @@
 import {GraphTopologyActionTypes} from "../GraphTopologyActionTypes";
+import {Link} from "../GraphTopologyContext";
 
 export type ParseConnectionsDataAction = (data: string) => void;
 
@@ -22,9 +23,10 @@ export  function parseConnectionsDataAction(dispatch: any) {
 
         const connections: string[] = data.split(/\r?\n/);
         let topology: string[] = [];
+        let links: Array<Link> = [];
         const graph: Graph = {};
-        const secredHash = "%^&";
-        const visited: VisitedData = {}
+        const secretHash = "%^&";
+        const visited: VisitedData = {};
         connections.forEach((connection: string) => {
             if (connection.length !== 0) {
                 const splitted: string[] = connection.split(" calls ");
@@ -32,7 +34,7 @@ export  function parseConnectionsDataAction(dispatch: any) {
                     console.log(splitted);
                     const edge1Id = splitted[0].trim();
                     const edge2Id = splitted[1].trim();
-                    const visitedKey = edge1Id + secredHash + edge2Id;
+                    const visitedKey = edge1Id + secretHash + edge2Id;
                     if (!visited[visitedKey]) {
                         if (!graph[edge1Id]) {
                             graph[edge1Id] = {
@@ -51,6 +53,10 @@ export  function parseConnectionsDataAction(dispatch: any) {
                             graph[edge2Id].in_degree += 1;
                         }
                         visited[visitedKey] = true;
+                        links.push({
+                            source: edge1Id,
+                            target: edge2Id
+                        })
                     }
                 } else {
                     console.warn("wrong data format: " + connection);
@@ -85,11 +91,15 @@ export  function parseConnectionsDataAction(dispatch: any) {
         if (count !== V.length) {
             console.warn("There exists a cycle in the graph");
             topology = [];
+            links = [];
         }
 
         dispatch({
             type: GraphTopologyActionTypes.PARSE_CONNECTIONS_DATA,
-            payload: topology,
+            payload: {
+                topology,
+                links
+            },
         });
     }
 }

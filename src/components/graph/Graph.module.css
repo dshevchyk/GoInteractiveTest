@@ -1,5 +1,3 @@
 .Graph {
-    width: 200px;
-    height: 100px;
-    background: green;
+    border: 1px solid black;
 }
