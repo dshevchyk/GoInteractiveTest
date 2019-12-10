@@ -79,7 +79,7 @@ export  function parseConnectionsDataAction(dispatch: any) {
 
         dispatch({
             type: GraphTopologyActionTypes.PARSE_CONNECTIONS_DATA,
-            payload: [topology],
+            payload: topology,
         });
     }
 }
