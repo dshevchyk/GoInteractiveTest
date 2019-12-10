@@ -3,7 +3,6 @@ import styles from './Input.module.css';
 import {useGraphTopologyActions} from "../../core/graphTopologyProvider/GraphTopologyContext";
 
 export const Input: React.FC = () => {
-
     const { addConnection } = useGraphTopologyActions();
     const fromRef = React.useRef<any>(null);
     const toRef = React.useRef<any>(null);
